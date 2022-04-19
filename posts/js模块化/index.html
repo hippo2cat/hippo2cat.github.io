@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?a316b5724350c51f87f7548a387931bd";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+    
+      
+        <title>
+          
+            js模块化 | 
+                hippoc
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="ES6之前，js是没有官方的模块化实现的，最初有几种简单的类模块化方案  命名空间 var moduleA &#x3D; &amp;#123;&amp;#125;; moduleA.name &#x3D; &amp;#x27;moduleAName&amp;#x27;;  var moduleB &#x3D; &amp;#123;&amp;#125;; moduleB.name &#x3D; &amp;#x27;moduleBName&amp;#x27;;  但是这种方法只是简单的结构上的隔离，对于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js模块化">
+<meta property="og:url" content="https://blog.hippoc.cc/posts/js%E6%A8%A1%E5%9D%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="hippoc">
+<meta property="og:description" content="ES6之前，js是没有官方的模块化实现的，最初有几种简单的类模块化方案  命名空间 var moduleA &#x3D; &amp;#123;&amp;#125;; moduleA.name &#x3D; &amp;#x27;moduleAName&amp;#x27;;  var moduleB &#x3D; &amp;#123;&amp;#125;; moduleB.name &#x3D; &amp;#x27;moduleBName&amp;#x27;;  但是这种方法只是简单的结构上的隔离，对于">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-18T06:26:38.000Z">
+<meta property="article:modified_time" content="2022-04-19T01:58:11.865Z">
+<meta property="article:author" content="hippo2cat">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+          
+                    
+                      <link rel="shortcut icon" href="/favicon.png">
+                        
+                          
+                            
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+                              
+                                
+<link rel="stylesheet" href="/css/style.css">
+
+                                  
+                                    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+                                      
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+  <body>
+    <div id="container">
+      <div id="wrap">
+        <header id="header">
+  <!-- <div id="banner"></div> -->
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">
+            首页
+          </a>
+          
+          <a class="main-nav-link" href="/archives">
+            归档
+          </a>
+          
+      </nav>
+      <nav id="sub-nav">
+        
+            
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.hippoc.cc"></form>
+      </div>
+    </div>
+  </div>
+</header>
+          <div class="outer">
+            <section id="main">
+              <article id="post-js模块化" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/js%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+  <time class="dt-published" datetime="2022-04-18T06:26:38.000Z" itemprop="datePublished">2022-04-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/frontend/">frontend</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+      
+        <header class="article-header">
+          
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      js模块化
+    </h1>
+  
+
+        </header>
+        
+          
+            <div class="e-content article-entry" itemprop="articleBody">
+              <div class="markdown-body">
+                <p>ES6之前，js是没有官方的模块化实现的，最初有几种简单的类模块化方案</p>
+<ol>
+<li><p>命名空间</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> moduleA = &#123;&#125;;
+moduleA.<span class="hljs-property">name</span> = <span class="hljs-string">&#x27;moduleAName&#x27;</span>;
+
+<span class="hljs-keyword">var</span> moduleB = &#123;&#125;;
+moduleB.<span class="hljs-property">name</span> = <span class="hljs-string">&#x27;moduleBName&#x27;</span>;</code></pre>
+
+<p>但是这种方法只是简单的结构上的隔离，对于变量赋值并没有保护机制，后来就出现了闭包实现模块化的方式。</p>
+</li>
+<li><p>闭包</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> moduleA = (
+  <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;moduleAName&#x27;</span>
+    <span class="hljs-keyword">return</span> &#123;
+      <span class="hljs-attr">getName</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+        <span class="hljs-keyword">return</span> name
+      &#125;
+    &#125;
+  &#125;
+)();</code></pre>
+
+<p>使用立即执行函数（IIFE）可以隔离模块内变量操作。</p>
+<p>但是比如循环依赖、全局变量污染、数据保护的问题还是没有得到解决。</p>
+<p>于是后来就出现了较为成熟的几个模块化解决方案。</p>
+</li>
+<li><p>CommonJS</p>
+<p>CommonJS模块化规范是用于服务端的模块化解决方案，最早被称为ServerJS，致力于打造浏览器外模块约定。</p>
+<p>CommonJS中定义了两个变量用于导入导出模块：<code>require</code>和<code>module</code>。</p>
+<ol>
+<li><p>用法：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// a.js</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span>.<span class="hljs-property">a</span> = <span class="hljs-number">1</span>;
+<span class="hljs-comment">// 或</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;
+  <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>
+&#125;;
+
+<span class="hljs-comment">// b.js</span>
+<span class="hljs-keyword">const</span> &#123; a &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./a.js&#x27;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 1</span></code></pre>
+
+<ol>
+<li><p><code>module.exports</code>&#x2F;<code>exports</code></p>
+<p>在Nodejs中的CommonJS实现中，为了方便定义了一个<code>exports</code>变量：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> <span class="hljs-built_in">exports</span> = <span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span>;</code></pre>
+
+<p>因为只是创建了一个<code>exports</code>向<code>module.exports</code>的引用，如果重新对<code>exports</code>赋值只会改变<code>exports</code>的指向，并不能正确的导出值。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">exports</span> = <span class="hljs-number">1</span>; <span class="hljs-comment">//这是无效的</span></code></pre>
+</li>
+<li><p><code>require</code></p>
+<p><code>require</code>函数的作用是读取一个js文件并返回这个文件的<code>module.exports</code>对象。第一次读取模块时会缓存该模块，以后再加载时会直接从缓存中加载。</p>
+<p><strong>加载过程是一次浅拷贝</strong>，一旦加载一个文件后，文件内部值变化就影响不到导出的值。</p>
+<blockquote>
+<p>因为是浅拷贝，如果导出的值是一个对象或数组之类的引用值，文件内部变化可以影响导出的值。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><p>实现：</p>
+<ol>
+<li><p>包装</p>
+<p>比如有一个<code>a.js</code>文件内容为：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;
+
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = a;</code></pre>
+
+<p>使用包装函数将其包装下面函数的字符串：</p>
+<pre><code class="hljs javascript">(
+  <span class="hljs-keyword">function</span>(<span class="hljs-params"><span class="hljs-built_in">exports</span>, <span class="hljs-built_in">require</span>, <span class="hljs-variable language_">module</span>, __filename, __dirname</span>) &#123;
+    <span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;
+    <span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = a;
+  &#125;
+)</code></pre>
+</li>
+<li><p>加载</p>
+<p>调用<code>require</code>函数时会先查找缓存，如果缓存中找不到结果，会调用类似<code>eval</code>的函数并传入参数，返回<code>module.exports</code>对象并缓存。</p>
+<pre><code class="hljs javascript"><span class="hljs-title function_">runInThisContext</span>(moduleFunction)(<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span>, <span class="hljs-built_in">require</span>, <span class="hljs-variable language_">module</span>, __filename, __dirname);</code></pre>
+
+<p><strong>加载顺序采用深度优先模式</strong></p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// id 为路径标识符</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">require</span>(<span class="hljs-params">id</span>) &#123;
+  <span class="hljs-comment">/* 查找 Module 上有没有已经加载的 js  对象*/</span>
+  <span class="hljs-keyword">const</span> cachedModule = <span class="hljs-title class_">Module</span>.<span class="hljs-property">_cache</span>[id];
+   
+  <span class="hljs-comment">/* 如果已经加载了那么直接取走缓存的 exports 对象  */</span>
+  <span class="hljs-keyword">if</span>(cachedModule)&#123;
+    <span class="hljs-keyword">return</span> cachedModule.<span class="hljs-property">exports</span>;
+  &#125;
+ 
+  <span class="hljs-comment">/* 创建当前模块的 module  */</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-variable language_">module</span> = &#123; <span class="hljs-attr">exports</span>: &#123;&#125; ,<span class="hljs-attr">loaded</span>: <span class="hljs-literal">false</span> , ...&#125;;
+
+  <span class="hljs-comment">/* 将 module 缓存到 Module 的缓存属性中，路径标识符作为 id */</span>  
+  <span class="hljs-title class_">Module</span>.<span class="hljs-property">_cache</span>[id] = <span class="hljs-variable language_">module</span>;
+  <span class="hljs-comment">/* 加载文件 */</span>
+  <span class="hljs-title function_">runInThisContext</span>(<span class="hljs-title function_">wrapper</span>(<span class="hljs-string">&#x27;module.exports = &quot;123&quot;&#x27;</span>))(<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span>, <span class="hljs-built_in">require</span>, <span class="hljs-variable language_">module</span>, __filename, __dirname);
+  <span class="hljs-comment">/* 加载完成 */</span>/
+  <span class="hljs-variable language_">module</span>.<span class="hljs-property">loaded</span> = <span class="hljs-literal">true</span> ;
+  <span class="hljs-comment">/* 返回值 */</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span>;
+&#125;</code></pre></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>ESModule</p>
+<p>在ES6标准中原生实现了模块，其本质是在编译时创建了一个<strong>只读引用</strong>，所以运行时变量值的修改会影响全局。</p>
+<ol>
+<li><p>用法</p>
+<p>标准中有<code>import</code>和<code>export</code>两个关键字，使用这两个关键字可以对模块进行导入导出。</p>
+<ol>
+<li><p><code>export</code>&#x2F;<code>export default</code></p>
+<p>使用<code>export</code>可以实现单变量导出，可以单独导出或统一导出，例如：</p>
+<pre><div class="caption"><span>export.js</span></div><code class="hljs javascript"><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">const</span> b = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">const</span> c = <span class="hljs-number">3</span>;
+
+<span class="hljs-keyword">export</span> a;
+
+<span class="hljs-keyword">export</span> &#123;
+  b,
+  c
+&#125;;</code></pre>
+
+<p>使用<code>export default</code>可以实现默认导出，例如：</p>
+<pre><div class="caption"><span>export-default.js</span></div><code class="hljs javascript"><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> a;</code></pre>
+
+<p>一个文件可以同时使用<code>export</code>和<code>export default</code>，导入时互不干扰。</p>
+</li>
+<li><p><code>import</code></p>
+<p>导入使用<code>export</code>导出的变量时，需要使用析构指明变量名或使用统一导入，例如：</p>
+<pre><div class="caption"><span>export.js</span></div><code class="hljs javascript"><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">const</span> b = <span class="hljs-number">2</span>;
+
+<span class="hljs-keyword">export</span> &#123;
+  a,
+  b
+&#125;;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+  a,
+  b
+&#125;;</code></pre>
+
+<pre><div class="caption"><span>import-export.js</span></div><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; a, b &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;export.js&#x27;</span>;
+<span class="hljs-comment">// 或</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;export.js&#x27;</span>; <span class="hljs-comment">// 可以在下文中使用a, b</span>
+<span class="hljs-comment">// 或</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> exVal <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;export.js&#x27;</span>; <span class="hljs-comment">// 可以在下文中使用exVal.a, exVal.b</span></code></pre>
+
+<p>导入使用<code>export default</code>导出的变量时，不能使用析构，可以在后续代码中再进行析构，例如：</p>
+<pre><div class="caption"><span>import-export-default.js</span></div><code class="hljs javascript"><span class="hljs-keyword">import</span> exdVal <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;export.js&#x27;</span>;
+
+<span class="hljs-keyword">const</span> &#123;
+  a,
+  b
+&#125; = exdVal;</code></pre>
+
+<p>也可以同时导入两种导出，例如：</p>
+<pre><div class="caption"><span>import-all.js</span></div><code class="hljs javascript"><span class="hljs-keyword">import</span> exdVal, &#123; a, b &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;export.js&#x27;</span>;</code></pre></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+              </div>
+            </div>
+            
+              <footer class="article-footer">
+                <a data-url="https://blog.hippoc.cc/posts/js%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="cl25qznmg0002vwuaeua98ikk" data-title="js模块化"
+                  class="article-share-link">
+                  分享
+                </a>
+                
+                    
+                        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+
+              </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/posts/%E4%BD%BF%E7%94%A8nginx%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">使用nginx配置代理</div>
+    </a>
+  
+</nav>
+
+      
+</article>
+
+
+    
+            </section>
+            
+              <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/frontend/">frontend</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tech/">tech</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/tech/frontend/">frontend</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tech/map/">map</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/" rel="tag">h5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" rel="tag">前端安全</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" style="font-size: 10px;">前端安全</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/js%E6%A8%A1%E5%9D%97%E5%8C%96/">js模块化</a>
+          </li>
+        
+          <li>
+            <a href="/posts/%E4%BD%BF%E7%94%A8nginx%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/">使用nginx配置代理</a>
+          </li>
+        
+          <li>
+            <a href="/posts/vue3/">vue3</a>
+          </li>
+        
+          <li>
+            <a href="/posts/%E7%AC%AC%E4%B8%89%E6%96%B9cookie/">第三方cookie</a>
+          </li>
+        
+          <li>
+            <a href="/posts/CORS/">CORS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+                
+          </div>
+          <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 hippo2cat<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+      </div>
+      <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+        
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+    </div>
+  </body>
+  <!-- github-markdown-css -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/github-markdown-css@5.1.0/github-markdown.css"
+    integrity="sha256-dhwQtnGBlkezBpomvm+7cCLIrH/Dc6l2GLEuNRSJRjQ=" crossorigin="anonymous">
+  <!-- highlight-css -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/highlight.js@11.5.0/styles/github.css"
+    integrity="sha256-Oppd74ucMR5a5Dq96FxjEzGF7tTw2fZ/6ksAqDCM8GY=" crossorigin="anonymous">
+
+</html>
