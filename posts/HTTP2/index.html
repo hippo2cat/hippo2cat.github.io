@@ -15,16 +15,21 @@
       
         <title>
           
-            标签: cdn | 
+            HTTP2 | 
                 hippoc
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta property="og:type" content="website">
-<meta property="og:title" content="hippoc">
-<meta property="og:url" content="https://blog.hippoc.cc/tags/cdn/index.html">
+        <meta name="description" content="比较下HTTP1.1和HTTP2的相关优缺点 之前为了解决HTTP1.1连接数限制采取的措施   域名分片 实际上就是将请求的资源放到多个子域名上来突破请求并行数限制   文件合并&#x2F;雪碧图&#x2F;资源内联 减少请求次数   HTTP2带来的特性   二进制分帧层 代替原本的明文传输，使用二进制序列传输信息。将原本的报文分成更小的帧序列进行传输。   多路复用 原本同域下同时最多只能发起6-8个请求，为了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP2">
+<meta property="og:url" content="https://blog.hippoc.cc/posts/HTTP2/index.html">
 <meta property="og:site_name" content="hippoc">
+<meta property="og:description" content="比较下HTTP1.1和HTTP2的相关优缺点 之前为了解决HTTP1.1连接数限制采取的措施   域名分片 实际上就是将请求的资源放到多个子域名上来突破请求并行数限制   文件合并&#x2F;雪碧图&#x2F;资源内联 减少请求次数   HTTP2带来的特性   二进制分帧层 代替原本的明文传输，使用二进制序列传输信息。将原本的报文分成更小的帧序列进行传输。   多路复用 原本同域下同时最多只能发起6-8个请求，为了">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-19T08:42:45.000Z">
+<meta property="article:modified_time" content="2022-04-19T09:35:23.171Z">
 <meta property="article:author" content="hippo2cat">
+<meta property="article:tag" content="http2">
 <meta name="twitter:card" content="summary">
           
                     
@@ -79,51 +84,132 @@
 </header>
           <div class="outer">
             <section id="main">
-              
-          
-            
-              
-                
-                  
-                      
-                        <section class="archives-wrap">
-                          <div class="archive-year-wrap">
-                            <a href="/archives/2022" class="archive-year">
-                              2022
-                            </a>
-                          </div>
-                          <div class="archives">
-                            
-                              <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/posts/%E5%BC%95%E5%85%A5cdn%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E5%8F%91%E7%8E%B0/" class="archive-article-date">
-  <time class="dt-published" datetime="2022-04-08T06:59:05.000Z" itemprop="datePublished">4月 8</time>
+              <article id="post-HTTP2" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/HTTP2/" class="article-date">
+  <time class="dt-published" datetime="2022-04-19T08:42:45.000Z" itemprop="datePublished">2022-04-19</time>
 </a>
       
-    
-      <h1 itemprop="name" class="post-title">
-        <a class="archive-article-title" href="/posts/%E5%BC%95%E5%85%A5cdn%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E5%8F%91%E7%8E%B0/">
-          引入cdn的一些小发现
-        </a>
-      </h1>
-      <div class="title-extra">
-        <span class="post-count">
-          338字
-        </span>
-      </div>
-      
-          
-    </header>
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/tech/">tech</a>►<a class="article-category-link" href="/categories/tech/frontend/">frontend</a>
   </div>
-</article>
-                                
-                                  
-                          </div>
-                        </section>
+
+  </div>
+  <div class="article-inner">
+    
+      
+        <header class="article-header">
+          
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          HTTP2
+        </h1>
+        
+          
+        </header>
+        
+          
+            <div class="e-content article-entry" itemprop="articleBody">
+              <div class="markdown-body">
+                <p>比较下HTTP1.1和HTTP2的相关优缺点</p>
+<h2 id="之前为了解决HTTP1-1连接数限制采取的措施">之前为了解决HTTP1.1连接数限制采取的措施</h2>
+<ol>
+<li>
+<p>域名分片</p>
+<p>实际上就是将请求的资源放到多个子域名上来突破请求并行数限制</p>
+</li>
+<li>
+<p>文件合并/雪碧图/资源内联</p>
+<p>减少请求次数</p>
+</li>
+</ol>
+<h2 id="HTTP2带来的特性">HTTP2带来的特性</h2>
+<ol>
+<li>
+<p>二进制分帧层</p>
+<p>代替原本的明文传输，使用二进制序列传输信息。将原本的报文分成更小的帧序列进行传输。</p>
+</li>
+<li>
+<p>多路复用</p>
+<p>原本同域下同时最多只能发起6-8个请求，为了发起请求需要建立多个连接。现在只需要建立一个TCP连接，在这个连接上创建多个流同时传输二进制帧，每个流对应之前的一个连接，每个帧上面都有流标识ID，帧的发送顺序也有严格要求，每个流传输完毕后将二进制帧组装后就获得了一个完整的消息报文。</p>
+</li>
+<li>
+<p>服务端推送</p>
+<p>浏览器发送一个请求，服务器主动向浏览器推送与这个请求相关的资源，这样浏览器就不用发起后续请求。这里涉及到一个知识点<code>preload</code>，单独写一篇文章介绍。</p>
+</li>
+<li>
+<p>头部压缩</p>
+<p>使用了HPACK算法压缩了报文头部大小。</p>
+</li>
+<li>
+<p>应用层的重置连接</p>
+<p>以前重置连接需要先断开连接再重新连接，现在实际上只需要重置流就可以了，不涉及连接层面的操作。</p>
+</li>
+<li>
+<p>请求优先级设置</p>
+<p>连接中每个流都可以设置依赖性和权重，从而实现优先级控制。解决重要请求被阻塞的问题。</p>
+</li>
+<li>
+<p>流量控制</p>
+<p>连接中每个流都可以设置流量窗口大小，可以限制另一端发送数据。</p>
+</li>
+</ol>
+<h2 id="建立HTTP2请求的两个协商机制">建立HTTP2请求的两个协商机制</h2>
+<ol>
+<li>
+<p><s>HTTP Upgrade</s>（浏览器不支持这种方式）</p>
+<p>非加密连接下的协商方式，通过设置<code>HTTP2-Settings</code>字段设置HTTP2连接参数，通过101响应建立连接。</p>
+</li>
+<li>
+<p>LTS协商</p>
+<p>在<code>Client-Hello</code>和<code>Server-Hello</code>过程中使用<code>ALPN</code>协议进行协商。</p>
+</li>
+</ol>
+<h2 id="nginx使用HTTP2的配置">nginx使用HTTP2的配置</h2>
+<pre><div class="caption"><span>nginx.conf</span></div><code class="hljs nginx"><span class="hljs-attribute">listen</span> [::]:<span class="hljs-number">443</span> ssl http2 ipv6only=<span class="hljs-literal">on</span>;
+<span class="hljs-attribute">listen</span> <span class="hljs-number">443</span> ssl http2;</code></pre>
+              </div>
+            </div>
+            
+              <footer class="article-footer">
+                <a data-url="https://blog.hippoc.cc/posts/HTTP2/" data-id="cl25zkbh90000mcua8d45epeh" data-title="HTTP2"
+                  class="article-share-link">
+                  分享
+                </a>
+                
+                    
                         
-                          
-                            
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http2/" rel="tag">http2</a></li></ul>
+
+              </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%8E%A8%E9%80%81-preload/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          服务端推送-preload
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/js%E6%A8%A1%E5%9D%97%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">js模块化</div>
+    </a>
+  
+</nav>
+
+      
+</article>
+
+
+    
             </section>
             
               <aside id="sidebar">

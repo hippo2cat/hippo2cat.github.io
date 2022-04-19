@@ -19,12 +19,12 @@
                 hippoc
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="CORS即CROSS ORIGIN REQUEST SHARE是一种浏览器请求机制。 是一种基于HTTP头的机制。 为了保障跨源请求的安全 现代浏览器有两种请求API，XMLHttpRequest和Fetch API，均对请求的同源性有要求，如果请求的是跨源资源，则需要响应报文包含了正确的CORS响应头。 什么情况下需要CORS？摘自MDN:  前文提到的由 XMLHttpRequest 或 Fe">
+        <meta name="description" content="CORS即CROSS ORIGIN REQUEST SHARE是一种浏览器请求机制。 是一种基于HTTP头的机制。 为了保障跨源请求的安全 现代浏览器有两种请求API，XMLHttpRequest和Fetch API，均对请求的同源性有要求，如果请求的是跨源资源，则需要响应报文包含了正确的CORS响应头。 什么情况下需要CORS？ 摘自MDN:  前文提到的由 XMLHttpRequest 或 F">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CORS">
 <meta property="og:url" content="https://blog.hippoc.cc/posts/CORS/index.html">
 <meta property="og:site_name" content="hippoc">
-<meta property="og:description" content="CORS即CROSS ORIGIN REQUEST SHARE是一种浏览器请求机制。 是一种基于HTTP头的机制。 为了保障跨源请求的安全 现代浏览器有两种请求API，XMLHttpRequest和Fetch API，均对请求的同源性有要求，如果请求的是跨源资源，则需要响应报文包含了正确的CORS响应头。 什么情况下需要CORS？摘自MDN:  前文提到的由 XMLHttpRequest 或 Fe">
+<meta property="og:description" content="CORS即CROSS ORIGIN REQUEST SHARE是一种浏览器请求机制。 是一种基于HTTP头的机制。 为了保障跨源请求的安全 现代浏览器有两种请求API，XMLHttpRequest和Fetch API，均对请求的同源性有要求，如果请求的是跨源资源，则需要响应报文包含了正确的CORS响应头。 什么情况下需要CORS？ 摘自MDN:  前文提到的由 XMLHttpRequest 或 F">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-08T09:49:02.000Z">
 <meta property="article:modified_time" content="2022-04-11T06:49:27.435Z">
@@ -100,12 +100,12 @@
       
         <header class="article-header">
           
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      CORS
-    </h1>
-  
-
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          CORS
+        </h1>
+        
+          
         </header>
         
           
@@ -115,30 +115,39 @@
 <p><strong>是一种基于<code>HTTP</code>头的机制。</strong></p>
 <p><strong>为了保障跨源请求的安全</strong></p>
 <p>现代浏览器有两种请求API，<code>XMLHttpRequest</code>和<code>Fetch API</code>，均对请求的同源性有要求，如果请求的是跨源资源，则需要响应报文包含了正确的CORS响应头。</p>
-<h2 id="什么情况下需要CORS？"><a href="#什么情况下需要CORS？" class="headerlink" title="什么情况下需要CORS？"></a>什么情况下需要CORS？</h2><p>摘自MDN:</p>
+<h2 id="什么情况下需要CORS？">什么情况下需要CORS？</h2>
+<p>摘自MDN:</p>
 <blockquote>
-<p>前文提到的由 XMLHttpRequest 或 Fetch APIs 发起的跨源 HTTP 请求。<br>Web 字体 (CSS 中通过 @font-face 使用跨源字体资源)，因此，网站就可以发布 TrueType 字体资源，并只允许已授权网站进行跨站调用。<br>WebGL 贴图<br>使用 drawImage 将 Images&#x2F;video 画面绘制到 canvas。<br>来自图像的 CSS 图形</p>
+<p>前文提到的由 XMLHttpRequest 或 Fetch APIs 发起的跨源 HTTP 请求。<br>
+Web 字体 (CSS 中通过 @font-face 使用跨源字体资源)，因此，网站就可以发布 TrueType 字体资源，并只允许已授权网站进行跨站调用。<br>
+WebGL 贴图<br>
+使用 drawImage 将 Images/video 画面绘制到 canvas。<br>
+来自图像的 CSS 图形</p>
 </blockquote>
 <p>详细<a target="_blank" rel="noopener" href="https://fetch.spec.whatwg.org/#http-cors-protocol">cross-origin sharing standard</a></p>
-<h2 id="访问控制场景"><a href="#访问控制场景" class="headerlink" title="访问控制场景"></a>访问控制场景</h2><h3 id="1-简单请求"><a href="#1-简单请求" class="headerlink" title="1. 简单请求"></a>1. 简单请求</h3><p>如果满足以下条件，则可视为简单请求：</p>
+<h2 id="访问控制场景">访问控制场景</h2>
+<h3 id="1-简单请求">1. 简单请求</h3>
+<p>如果满足以下条件，则可视为简单请求：</p>
 <p>摘自MDN:</p>
 <blockquote>
 <ul>
-<li>使用下列方法之一：<ul>
+<li>使用下列方法之一：
+<ul>
 <li>GET</li>
 <li>HEAD</li>
 <li>POST</li>
 </ul>
 </li>
-<li>除了被用户代理自动设置的首部字段（例如 Connection，User-Agent）和在 Fetch 规范中定义为 禁用首部名称 的其他首部，允许人为设置的字段为 Fetch 规范定义的 对 CORS 安全的首部字段集合。该集合为：<ul>
+<li>除了被用户代理自动设置的首部字段（例如 Connection，User-Agent）和在 Fetch 规范中定义为 禁用首部名称 的其他首部，允许人为设置的字段为 Fetch 规范定义的 对 CORS 安全的首部字段集合。该集合为：
+<ul>
 <li>Accept</li>
 <li>Accept-Language</li>
 <li>Content-Language</li>
 <li>Content-Type （需要注意额外的限制）</li>
 <li>Content-Type 的值仅限于下列三者之一：</li>
-<li>text&#x2F;plain</li>
-<li>multipart&#x2F;form-data</li>
-<li>application&#x2F;x-www-form-urlencoded</li>
+<li>text/plain</li>
+<li>multipart/form-data</li>
+<li>application/x-www-form-urlencoded</li>
 </ul>
 </li>
 <li>请求中的任意 XMLHttpRequest 对象均没有注册任何事件监听器；XMLHttpRequest 对象可以使用 XMLHttpRequest.upload 属性访问。</li>
@@ -146,11 +155,13 @@
 </ul>
 </blockquote>
 <p>当使用简单请求时，仅需要使用请求头的<code>Origin</code>和<code>Access-Control-Allow-Origin</code>就能完成最简单的访问控制。</p>
-<h3 id="2-预检请求"><a href="#2-预检请求" class="headerlink" title="2. 预检请求"></a>2. 预检请求</h3><p>当不进行简单请求时，在进行跨源请求时，需要先使用<code>OPTIONS</code>方法发起一个预检请求到服务器，来判断服务器是否允许此请求。</p>
+<h3 id="2-预检请求">2. 预检请求</h3>
+<p>当不进行简单请求时，在进行跨源请求时，需要先使用<code>OPTIONS</code>方法发起一个预检请求到服务器，来判断服务器是否允许此请求。</p>
 <blockquote>
 <p>可以避免跨域请求对服务器的用户数据产生未预期的影响。</p>
 </blockquote>
-<h3 id="3-附带身份凭证的请求"><a href="#3-附带身份凭证的请求" class="headerlink" title="3. 附带身份凭证的请求"></a>3. 附带身份凭证的请求</h3><p>进行跨域请求时，如果不进行特殊处理，不会发送身份凭证信息，如果需要发送凭证，在请求时需要设置<code>withCredentials</code>为<code>true</code>，响应头<code>Access-Control-Allow-Credentials</code>也必须要设置为<code>true</code>，请求才能正确的完成。</p>
+<h3 id="3-附带身份凭证的请求">3. 附带身份凭证的请求</h3>
+<p>进行跨域请求时，如果不进行特殊处理，不会发送身份凭证信息，如果需要发送凭证，在请求时需要设置<code>withCredentials</code>为<code>true</code>，响应头<code>Access-Control-Allow-Credentials</code>也必须要设置为<code>true</code>，请求才能正确的完成。</p>
 <p>在进行附带身份凭证的请求时：</p>
 <ul>
 <li>服务器不能将<code>Access-Control-Allow-Origin</code>设置为<code>*</code></li>
@@ -162,7 +173,7 @@
             </div>
             
               <footer class="article-footer">
-                <a data-url="https://blog.hippoc.cc/posts/CORS/" data-id="cl25qznme0001vwuadfo717yb" data-title="CORS"
+                <a data-url="https://blog.hippoc.cc/posts/CORS/" data-id="cl25zkbhd0001mcuaegpt1888" data-title="CORS"
                   class="article-share-link">
                   分享
                 </a>
@@ -215,7 +226,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/" rel="tag">h5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" rel="tag">前端安全</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/h5/" rel="tag">h5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http2/" rel="tag">http2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" rel="tag">前端安全</a></li></ul>
     </div>
   </div>
 
@@ -225,7 +236,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" style="font-size: 10px;">前端安全</a>
+      <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/h5/" style="font-size: 10px;">h5</a> <a href="/tags/http2/" style="font-size: 10px;">http2</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" style="font-size: 10px;">前端安全</a>
     </div>
   </div>
 
@@ -247,6 +258,14 @@
       <ul>
         
           <li>
+            <a href="/posts/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%8E%A8%E9%80%81-preload/">服务端推送-preload</a>
+          </li>
+        
+          <li>
+            <a href="/posts/HTTP2/">HTTP2</a>
+          </li>
+        
+          <li>
             <a href="/posts/js%E6%A8%A1%E5%9D%97%E5%8C%96/">js模块化</a>
           </li>
         
@@ -256,14 +275,6 @@
         
           <li>
             <a href="/posts/vue3/">vue3</a>
-          </li>
-        
-          <li>
-            <a href="/posts/%E7%AC%AC%E4%B8%89%E6%96%B9cookie/">第三方cookie</a>
-          </li>
-        
-          <li>
-            <a href="/posts/CORS/">CORS</a>
           </li>
         
       </ul>
