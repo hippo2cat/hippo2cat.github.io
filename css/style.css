@@ -198,13 +198,12 @@ body {
 .widget-title {
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 2px;
   color: #999;
   margin-bottom: 1em;
   margin-left: 5px;
   line-height: 1em;
   text-shadow: 0 1px #fff;
-  font-weight: bold;
+  font-weight: 500;
 }
 .article-inner,
 .archive-article-inner {
@@ -1053,10 +1052,10 @@ a.article-title:hover {
 .widget {
   color: #777;
   text-shadow: 0 1px #fff;
-  background: #ddd;
-  -webkit-box-shadow: 0 -1px 4px #ccc inset;
-  box-shadow: 0 -1px 4px #ccc inset;
-  border: 1px solid #ccc;
+  background: #fff;
+  -webkit-box-shadow: 0 2px 3px #ddd;
+  box-shadow: 0 2px 3px #ddd;
+  border: 1px solid #ddd;
   padding: 15px;
   border-radius: 3px;
 }
