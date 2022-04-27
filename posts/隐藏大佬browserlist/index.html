@@ -15,16 +15,22 @@
       
         <title>
           
-            标签: http | 
+            隐藏大佬browserlist | 
                 果某的斯贝斯
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta property="og:type" content="website">
-<meta property="og:title" content="果某的斯贝斯">
-<meta property="og:url" content="https://blog.hippoc.cc/tags/http/index.html">
+        <meta name="description" content="了解PostCSS的时候其中有一个常用的插件，叫Autoprefixer，看到其依赖一个很眼熟的库browserlist，开发时经常会在源代码目录中看到一个名为.browserlist的文件，详细了解下，发现这个库竟然是一个隐藏大佬。 根据browserlist文档中描述，依赖它的一些著名的库有：  Autoprefixer Babel postcss-preset-env …  根据Autopr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="隐藏大佬browserlist">
+<meta property="og:url" content="https://blog.hippoc.cc/posts/%E9%9A%90%E8%97%8F%E5%A4%A7%E4%BD%ACbrowserlist/index.html">
 <meta property="og:site_name" content="果某的斯贝斯">
+<meta property="og:description" content="了解PostCSS的时候其中有一个常用的插件，叫Autoprefixer，看到其依赖一个很眼熟的库browserlist，开发时经常会在源代码目录中看到一个名为.browserlist的文件，详细了解下，发现这个库竟然是一个隐藏大佬。 根据browserlist文档中描述，依赖它的一些著名的库有：  Autoprefixer Babel postcss-preset-env …  根据Autopr">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-21T09:07:21.000Z">
+<meta property="article:modified_time" content="2022-04-21T09:34:15.904Z">
 <meta property="article:author" content="hippo2cat">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary">
           
                     
@@ -79,51 +85,103 @@
 </header>
           <div class="outer">
             <section id="main">
-              
-          
-            
-              
-                
-                  
-                      
-                        <section class="archives-wrap">
-                          <div class="archive-year-wrap">
-                            <a href="/archives/2022" class="archive-year">
-                              2022
-                            </a>
-                          </div>
-                          <div class="archives">
-                            
-                              <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/posts/HTTP%E7%BC%93%E5%AD%98/" class="archive-article-date">
-  <time class="dt-published" datetime="2022-04-19T13:22:19.000Z" itemprop="datePublished">4月 19</time>
+              <article id="post-隐藏大佬browserlist" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/%E9%9A%90%E8%97%8F%E5%A4%A7%E4%BD%ACbrowserlist/" class="article-date">
+  <time class="dt-published" datetime="2022-04-21T09:07:21.000Z" itemprop="datePublished">2022-04-21</time>
 </a>
       
-    
-      <h1 itemprop="name" class="post-title">
-        <a class="archive-article-title" href="/posts/HTTP%E7%BC%93%E5%AD%98/">
-          HTTP缓存
-        </a>
-      </h1>
-      <div class="title-extra">
-        <span class="post-count">
-          669字
-        </span>
-      </div>
-      
-          
-    </header>
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/tech/">tech</a>►<a class="article-category-link" href="/categories/tech/frontend/">frontend</a>
   </div>
-</article>
-                                
-                                  
-                          </div>
-                        </section>
+
+  </div>
+  <div class="article-inner">
+    
+      
+        <header class="article-header">
+          
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          隐藏大佬browserlist
+        </h1>
+        
+          
+        </header>
+        
+          
+            <div class="e-content article-entry" itemprop="articleBody">
+              <div class="markdown-body">
+                <p>了解<code>PostCSS</code>的时候其中有一个常用的插件，叫<code>Autoprefixer</code>，看到其依赖一个很眼熟的库<code>browserlist</code>，开发时经常会在源代码目录中看到一个名为<code>.browserlist</code>的文件，详细了解下，发现这个库竟然是一个隐藏大佬。</p>
+<p>根据<code>browserlist</code>文档中描述，依赖它的一些著名的库有：</p>
+<ul>
+<li>Autoprefixer</li>
+<li>Babel</li>
+<li>postcss-preset-env</li>
+<li>…</li>
+</ul>
+<p>根据<code>Autoprefixer</code>的文档，在项目中创建<code>.browserlist</code>可以控制受支持浏览器。</p>
+<p>根据<code>@babel/preset-env</code>的文档，同样在项目中创建<code>.browserlist</code>可以控制受支持浏览器。</p>
+<p>查看了下<code>browserlist</code>的依赖项，其中有：</p>
+<ul>
+<li><code>caniuse-lite</code> - 提供了浏览器兼容性数据库</li>
+<li><code>electron-to-chromium</code> - 提供了<code>electron</code>中<code>chromium</code>版本</li>
+<li>… - 其他不提供核心功能的库</li>
+</ul>
+
+              </div>
+            </div>
+            
+              <footer class="article-footer">
+                <a data-url="https://blog.hippoc.cc/posts/%E9%9A%90%E8%97%8F%E5%A4%A7%E4%BD%ACbrowserlist/" data-id="cl2hecm8w001oa0ua5su616ej" data-title="隐藏大佬browserlist"
+                  class="article-share-link">
+                  分享
+                </a>
+                
+                  <a href="https://blog.hippoc.cc/posts/%E9%9A%90%E8%97%8F%E5%A4%A7%E4%BD%ACbrowserlist/#disqus_thread" class="article-comment-link">
+                    留言
+                  </a>
+                  
+                    
                         
-                          
-                            
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+
+              </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/tailwind%E5%88%9D%E5%B0%9D%E8%AF%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          tailwind初尝试
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/postcss%E6%A6%82%E8%A7%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">postcss概览</div>
+    </a>
+  
+</nav>
+
+      
+</article>
+
+
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by
+          Disqus.</a></noscript>
+    </div>
+  </section>
+  
+    
             </section>
             
               <aside id="sidebar">
@@ -223,8 +281,8 @@
         
   <script>
     var disqus_config = function () {
-      this.page.url = '';
-      this.page.identifier = '';
+      this.page.url = 'https://blog.hippoc.cc/posts/%E9%9A%90%E8%97%8F%E5%A4%A7%E4%BD%ACbrowserlist/';
+      this.page.identifier = '隐藏大佬browserlist';
     };
     (function () {
       var d = document, s = d.createElement('script');

@@ -15,16 +15,22 @@
       
         <title>
           
-            标签: http | 
+            postcss概览 | 
                 果某的斯贝斯
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta property="og:type" content="website">
-<meta property="og:title" content="果某的斯贝斯">
-<meta property="og:url" content="https://blog.hippoc.cc/tags/http/index.html">
+        <meta name="description" content="简单来说，PostCSS是一个能将CSS转换为AST的Node模块，基于它能够开发js插件，使用js插件能够对css文件进行一些操作，比如：lint, autoprefix, polyfill… 更加应该将其理解为CSS后处理器，相对于less, sass等预处理器。但是一些插件仍可以实现类似于预处理器的功能。   比较常用的一些插件  autoprefixer postcss-preset-en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="postcss概览">
+<meta property="og:url" content="https://blog.hippoc.cc/posts/postcss%E6%A6%82%E8%A7%88/index.html">
 <meta property="og:site_name" content="果某的斯贝斯">
+<meta property="og:description" content="简单来说，PostCSS是一个能将CSS转换为AST的Node模块，基于它能够开发js插件，使用js插件能够对css文件进行一些操作，比如：lint, autoprefix, polyfill… 更加应该将其理解为CSS后处理器，相对于less, sass等预处理器。但是一些插件仍可以实现类似于预处理器的功能。   比较常用的一些插件  autoprefixer postcss-preset-en">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-21T08:07:40.000Z">
+<meta property="article:modified_time" content="2022-04-21T08:49:16.586Z">
 <meta property="article:author" content="hippo2cat">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="postcss">
 <meta name="twitter:card" content="summary">
           
                     
@@ -79,51 +85,121 @@
 </header>
           <div class="outer">
             <section id="main">
-              
-          
-            
-              
-                
-                  
-                      
-                        <section class="archives-wrap">
-                          <div class="archive-year-wrap">
-                            <a href="/archives/2022" class="archive-year">
-                              2022
-                            </a>
-                          </div>
-                          <div class="archives">
-                            
-                              <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/posts/HTTP%E7%BC%93%E5%AD%98/" class="archive-article-date">
-  <time class="dt-published" datetime="2022-04-19T13:22:19.000Z" itemprop="datePublished">4月 19</time>
+              <article id="post-postcss概览" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/postcss%E6%A6%82%E8%A7%88/" class="article-date">
+  <time class="dt-published" datetime="2022-04-21T08:07:40.000Z" itemprop="datePublished">2022-04-21</time>
 </a>
       
-    
-      <h1 itemprop="name" class="post-title">
-        <a class="archive-article-title" href="/posts/HTTP%E7%BC%93%E5%AD%98/">
-          HTTP缓存
-        </a>
-      </h1>
-      <div class="title-extra">
-        <span class="post-count">
-          669字
-        </span>
-      </div>
-      
-          
-    </header>
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/tech/">tech</a>►<a class="article-category-link" href="/categories/tech/frontend/">frontend</a>
   </div>
-</article>
-                                
-                                  
-                          </div>
-                        </section>
+
+  </div>
+  <div class="article-inner">
+    
+      
+        <header class="article-header">
+          
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          postcss概览
+        </h1>
+        
+          
+        </header>
+        
+          
+            <div class="e-content article-entry" itemprop="articleBody">
+              <div class="markdown-body">
+                <p>简单来说，<code>PostCSS</code>是一个能将<code>CSS</code>转换为<code>AST</code>的Node模块，基于它能够开发js插件，使用js插件能够对css文件进行一些操作，比如：lint, autoprefix, polyfill…</p>
+<p>更加应该将其理解为CSS<em>后处理器</em>，相对于<code>less</code>, <code>sass</code>等<em>预处理器</em>。但是一些插件仍可以实现类似于预处理器的功能。</p>
+<ol>
+<li>
+<p>比较常用的一些插件</p>
+<ul>
+<li>autoprefixer</li>
+<li>postcss-preset-env</li>
+<li>postcss-pxtorem</li>
+<li>postcss-px-to-viewport</li>
+<li>…</li>
+</ul>
+</li>
+<li>
+<p>使用方法</p>
+<p>例如在webpack中使用，使用<code>postcss-loader</code></p>
+<pre><div class="caption"><span>webpack.config.js</span></div><code class="hljs javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;
+  <span class="hljs-attr">module</span>: &#123;
+    <span class="hljs-attr">rules</span>: [
+      &#123;
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>,
+        <span class="hljs-attr">use</span>: [<span class="hljs-string">&#x27;style-loader&#x27;</span>, <span class="hljs-string">&#x27;postcss-loader&#x27;</span>],
+      &#125;
+    ]
+  &#125;
+&#125;</code></pre>
+<pre><div class="caption"><span>postcss.config.js</span></div><code class="hljs javascript"><span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = &#123;
+  <span class="hljs-attr">plugins</span>: [
+    <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;autoprefixer&#x27;</span>),
+    <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;postcss-nested&#x27;</span>)
+  ]
+&#125;</code></pre>
+</li>
+</ol>
+
+              </div>
+            </div>
+            
+              <footer class="article-footer">
+                <a data-url="https://blog.hippoc.cc/posts/postcss%E6%A6%82%E8%A7%88/" data-id="cl2hecm8c0008a0ua0c0z5nkp" data-title="postcss概览"
+                  class="article-share-link">
+                  分享
+                </a>
+                
+                  <a href="https://blog.hippoc.cc/posts/postcss%E6%A6%82%E8%A7%88/#disqus_thread" class="article-comment-link">
+                    留言
+                  </a>
+                  
+                    
                         
-                          
-                            
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postcss/" rel="tag">postcss</a></li></ul>
+
+              </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/%E9%9A%90%E8%97%8F%E5%A4%A7%E4%BD%ACbrowserlist/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          隐藏大佬browserlist
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/webpack%E4%B8%80%E4%BA%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">webpack一二</div>
+    </a>
+  
+</nav>
+
+      
+</article>
+
+
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by
+          Disqus.</a></noscript>
+    </div>
+  </section>
+  
+    
             </section>
             
               <aside id="sidebar">
@@ -223,8 +299,8 @@
         
   <script>
     var disqus_config = function () {
-      this.page.url = '';
-      this.page.identifier = '';
+      this.page.url = 'https://blog.hippoc.cc/posts/postcss%E6%A6%82%E8%A7%88/';
+      this.page.identifier = 'postcss概览';
     };
     (function () {
       var d = document, s = d.createElement('script');

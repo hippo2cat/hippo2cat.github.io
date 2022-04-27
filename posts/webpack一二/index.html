@@ -15,16 +15,21 @@
       
         <title>
           
-            标签: http | 
+            webpack一二 | 
                 果某的斯贝斯
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta property="og:type" content="website">
-<meta property="og:title" content="果某的斯贝斯">
-<meta property="og:url" content="https://blog.hippoc.cc/tags/http/index.html">
+        <meta name="description" content="概述 webpack是一个用于javascript应用程序的静态模块打包工具。整体结构上由几个关键节点构成。  entry output loader plugin    entry entry是整个应用程序的入口，可以有一个或多个，webpack以此为入口构建依赖图。   output 打包完成后的文件作为output输出，一个entry可以对应一个或多个输出文件，多个输出文件涉及到代码分割。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack一二">
+<meta property="og:url" content="https://blog.hippoc.cc/posts/webpack%E4%B8%80%E4%BA%8C/index.html">
 <meta property="og:site_name" content="果某的斯贝斯">
+<meta property="og:description" content="概述 webpack是一个用于javascript应用程序的静态模块打包工具。整体结构上由几个关键节点构成。  entry output loader plugin    entry entry是整个应用程序的入口，可以有一个或多个，webpack以此为入口构建依赖图。   output 打包完成后的文件作为output输出，一个entry可以对应一个或多个输出文件，多个输出文件涉及到代码分割。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-20T10:07:38.000Z">
+<meta property="article:modified_time" content="2022-04-24T12:21:41.230Z">
 <meta property="article:author" content="hippo2cat">
+<meta property="article:tag" content="webpack">
 <meta name="twitter:card" content="summary">
           
                     
@@ -79,51 +84,115 @@
 </header>
           <div class="outer">
             <section id="main">
-              
-          
-            
-              
-                
-                  
-                      
-                        <section class="archives-wrap">
-                          <div class="archive-year-wrap">
-                            <a href="/archives/2022" class="archive-year">
-                              2022
-                            </a>
-                          </div>
-                          <div class="archives">
-                            
-                              <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/posts/HTTP%E7%BC%93%E5%AD%98/" class="archive-article-date">
-  <time class="dt-published" datetime="2022-04-19T13:22:19.000Z" itemprop="datePublished">4月 19</time>
+              <article id="post-webpack一二" class="h-entry article article-type-post"
+  itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/webpack%E4%B8%80%E4%BA%8C/" class="article-date">
+  <time class="dt-published" datetime="2022-04-20T10:07:38.000Z" itemprop="datePublished">2022-04-20</time>
 </a>
       
-    
-      <h1 itemprop="name" class="post-title">
-        <a class="archive-article-title" href="/posts/HTTP%E7%BC%93%E5%AD%98/">
-          HTTP缓存
-        </a>
-      </h1>
-      <div class="title-extra">
-        <span class="post-count">
-          669字
-        </span>
-      </div>
-      
-          
-    </header>
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/tech/">tech</a>►<a class="article-category-link" href="/categories/tech/frontend/">frontend</a>
   </div>
-</article>
-                                
-                                  
-                          </div>
-                        </section>
+
+  </div>
+  <div class="article-inner">
+    
+      
+        <header class="article-header">
+          
+    
+        <h1 class="p-name article-title" itemprop="headline name">
+          webpack一二
+        </h1>
+        
+          
+        </header>
+        
+          
+            <div class="e-content article-entry" itemprop="articleBody">
+              <div class="markdown-body">
+                <h2 id="概述">概述</h2>
+<p>webpack是一个用于javascript应用程序的静态模块打包工具。整体结构上由几个关键节点构成。</p>
+<ul>
+<li>entry</li>
+<li>output</li>
+<li>loader</li>
+<li>plugin</li>
+</ul>
+<ol>
+<li>
+<p>entry</p>
+<p>entry是整个应用程序的入口，可以有一个或多个，webpack以此为入口构建<strong>依赖图</strong>。</p>
+</li>
+<li>
+<p>output</p>
+<p>打包完成后的文件作为output输出，一个entry可以对应一个或多个输出文件，多个输出文件涉及到<strong>代码分割</strong>。</p>
+</li>
+<li>
+<p>loader</p>
+<p>webpack只能处理javascript模块，对于其他文件需要使用loader处理成webpack能够理解的形式。</p>
+</li>
+<li>
+<p>plugin</p>
+<p>plugin可以帮助webpack实现更多更丰富的功能，比如<strong>代码压缩</strong>…</p>
+</li>
+</ol>
+<h2 id="依赖图">依赖图</h2>
+<h2 id="代码分割">代码分割</h2>
+
+              </div>
+            </div>
+            
+              <footer class="article-footer">
+                <a data-url="https://blog.hippoc.cc/posts/webpack%E4%B8%80%E4%BA%8C/" data-id="cl2hecm8g000fa0uaa0l12otn" data-title="webpack一二"
+                  class="article-share-link">
+                  分享
+                </a>
+                
+                  <a href="https://blog.hippoc.cc/posts/webpack%E4%B8%80%E4%BA%8C/#disqus_thread" class="article-comment-link">
+                    留言
+                  </a>
+                  
+                    
                         
-                          
-                            
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
+
+              </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/postcss%E6%A6%82%E8%A7%88/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          postcss概览
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/OAuth2%E7%AE%80%E8%AF%BB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">OAuth2简读</div>
+    </a>
+  
+</nav>
+
+      
+</article>
+
+
+  <section id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by
+          Disqus.</a></noscript>
+    </div>
+  </section>
+  
+    
             </section>
             
               <aside id="sidebar">
@@ -223,8 +292,8 @@
         
   <script>
     var disqus_config = function () {
-      this.page.url = '';
-      this.page.identifier = '';
+      this.page.url = 'https://blog.hippoc.cc/posts/webpack%E4%B8%80%E4%BA%8C/';
+      this.page.identifier = 'webpack一二';
     };
     (function () {
       var d = document, s = d.createElement('script');
